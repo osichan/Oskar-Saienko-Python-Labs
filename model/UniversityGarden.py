@@ -1,10 +1,10 @@
 from model.Garden import Garden
 
 
-class UniversityGarden (Garden):
+class UniversityGarden(Garden):
 
-    def __init__(self, area=0.0, number_of_flowers=0, number_of_sculptures=0,):
-        super().__init__(area, number_of_flowers)
+    def __init__(self, area=0.0, number_of_flowers=0, what_is_growing=[], number_of_sculptures=0, ):
+        super().__init__(area, number_of_flowers, what_is_growing)
         self.number_of_sculptures = number_of_sculptures
 
     def has_orchard(self):
@@ -19,6 +19,6 @@ class UniversityGarden (Garden):
 
 
 if __name__ == "__main__":
-    university_garden  = UniversityGarden (10, 11, 12)
+    university_garden = UniversityGarden(10, 11, ["Lavandula", "Asclepias"], 12)
     print(university_garden.has_orchard())
     print(university_garden)
