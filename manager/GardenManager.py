@@ -4,17 +4,21 @@ from model.Farmstead import Farmstead
 from model.Orchard import Orchard
 from model.UniversityGarden import UniversityGarden
 
+
 def log_parameters(func):
     def wrapper(*args, **kwargs):
         print(f"Calling {func.__name__} with parameters: args={args} kwargs={kwargs}")
         return func(*args, **kwargs)
+
     return wrapper
+
 
 def log_return_value(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
         print(f"{func.__name__} returned: {result}")
         return result
+
     return wrapper
 
 
@@ -53,7 +57,8 @@ class GardenManager:
 
     def __next__(self):
         if self.current_index < len(self.gardens):
-            return self.gardens[self.current_index]
+            self.current_index += 1
+            return self.gardens[self.current_index - 1]
         raise StopIteration
 
     @log_return_value
@@ -66,8 +71,7 @@ class GardenManager:
 
     @log_return_value
     def obj_and_result_of_has_orchard(self):
-        return [f"{type(garden)}: {result}" for garden, result in
-                zip(self.gardens, [garden.has_orchard() for garden in self.gardens])]
+        return zip(self.gardens, [garden.has_orchard() for garden in self.gardens])
 
     @log_parameters
     @log_return_value
@@ -94,9 +98,14 @@ if __name__ == "__main__":
 
     print(manager.obj_and_his_index(), "\n")
 
-    print(manager.obj_and_result_of_has_orchard(), "\n")
+    for obj in manager.obj_and_result_of_has_orchard():
+        print(obj)
+
+    print("\n")
 
     for garden in manager.gardens:
         print(garden.get_attributes_by_type(int))
 
-    print("\n", manager.check_condition(is_in_garden_flowers_more_than_10))
+    print("\n")
+
+    print(manager.check_condition(is_in_garden_flowers_more_than_10))

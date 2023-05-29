@@ -21,25 +21,29 @@ class SetManager:
         return length
 
     def __getitem__(self, index):
+        our_list = []
         for obj in self.regular_manager:
-            what_is_growing_set = obj.what_is_growing
-            if index < len(what_is_growing_set):
-                return list(what_is_growing_set)[index]
-            index -= len(what_is_growing_set)
+            our_list += obj
+        if index <= len(our_list):
+            return our_list[index]
         raise IndexError("Index out of range")
 
     def __next__(self):
+        our_list = []
         for obj in self.regular_manager:
-            what_is_growing_set = obj.what_is_growing
-            if len(what_is_growing_set) > 0:
-                return list(what_is_growing_set)[0]
-        raise StopIteration
+            our_list += obj
+        if self.current_index < len(our_list):
+            result = our_list[self.current_index]
+            self.current_index += 1
+            return result
+
+        raise StopIteration()
 
 
 if __name__ == "__main__":
     manager = GardenManager()
     manager.add_gardens(
-        [BotanicGarden(10, 11, ["Rosa spp", "Acer palmatum"], 12, 13), Farmstead(10, 11, ["oats", "sunflower"], 12),
+        [BotanicGarden(10, 11, ["Rosa spp", "Acer palmatum"], 12, 13), Farmstead(10, 11, ["Oats", "Sunflower"], 12),
          Orchard(10, 11, ["Apple Trees", "Pear Trees"], 12), UniversityGarden(10, 11, ["Lavandula", "Asclepias"], 12)])
 
     SM = SetManager(manager.gardens)
@@ -48,4 +52,4 @@ if __name__ == "__main__":
 
     print("\nSet Manager by index:")
     for i in range(len(SM)):
-        print(SM[i])
+        print(i,SM[i])
