@@ -3,8 +3,8 @@ from model.Garden import Garden
 
 class Orchard(Garden):
 
-    def __init__(self, area=0.0, number_of_flowers=0, number_of_pods=0, ):
-        super().__init__(area, number_of_flowers)
+    def __init__(self, area=0.0, number_of_flowers=0,what_is_growing=[], number_of_pods=0, ):
+        super().__init__(area, number_of_flowers, what_is_growing)
         self.number_of_pods = number_of_pods
 
     def has_orchard(self):
@@ -19,6 +19,6 @@ class Orchard(Garden):
 
 
 if __name__ == "__main__":
-    orchard = Orchard(10, 11, 12)
+    orchard = Orchard(10, 11,["Apple Trees","Pear Trees"], 12)
     print(orchard.has_orchard())
     print(orchard)

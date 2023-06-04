@@ -3,8 +3,9 @@ from model.Garden import Garden
 
 class BotanicGarden(Garden):
 
-    def __init__(self, area=0.0, number_of_flowers=0, number_of_fruit_trees=0, number_of_greenhouses=0):
-        super().__init__(area, number_of_flowers)
+    def __init__(self, area=0.0, number_of_flowers=0, what_is_growing=[], number_of_fruit_trees=0,
+                 number_of_greenhouses=0):
+        super().__init__(area, number_of_flowers, what_is_growing)
         self.number_of_fruit_trees = number_of_fruit_trees
         self.number_of_greenhouses = number_of_greenhouses
 
@@ -21,6 +22,6 @@ class BotanicGarden(Garden):
 
 
 if __name__ == "__main__":
-    botanic_garden = BotanicGarden(10, 11, 12, 13)
+    botanic_garden = BotanicGarden(10, 11, ["Rosa spp", "Acer palmatum"], 12, 13)
     print(botanic_garden.has_orchard())
     print(botanic_garden)
