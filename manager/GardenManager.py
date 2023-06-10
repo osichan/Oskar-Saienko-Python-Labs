@@ -9,7 +9,6 @@ def log_parameters(func):
     def wrapper(*args, **kwargs):
         print(f"Calling {func.__name__} with parameters: args={args} kwargs={kwargs}")
         return func(*args, **kwargs)
-
     return wrapper
 
 
@@ -18,7 +17,6 @@ def log_return_value(func):
         result = func(*args, **kwargs)
         print(f"{func.__name__} returned: {result}")
         return result
-
     return wrapper
 
 
@@ -67,7 +65,7 @@ class GardenManager:
 
     @log_return_value
     def obj_and_his_index(self):
-        return [f"{index}: {type(garden)}" for index, garden in enumerate(self.gardens)]
+        return [f"{index}: {garden}" for index, garden in enumerate(self.gardens)]
 
     @log_return_value
     def obj_and_result_of_has_orchard(self):
